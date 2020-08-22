@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
 
+//        this is a editable line;
+
 
 //        Declarations of button and textView
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#a6b1e1"
+    android:background="#5edfff"
     tools:context=".homeScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Elder Ease"
-            android:textSize="36sp"
-            app:fontFamily="sans-serif-condensed-medium"
+            android:textSize="40sp"
+            app:fontFamily="casual"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

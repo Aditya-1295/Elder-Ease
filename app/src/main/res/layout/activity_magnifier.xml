@@ -23,26 +23,14 @@
         android:textSize="25sp"
         />
 
-    <TextView
-        android:id="@+id/txtMag"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/colorPrimary"
-        android:fontFamily="serif"
-        android:text="@string/magnifier"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/cardview_light_background"
-        android:textSize="25sp">
-
-    </TextView>
 
     <FrameLayout
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="0dp">
 
     </FrameLayout>
 

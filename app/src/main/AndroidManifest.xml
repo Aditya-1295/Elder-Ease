@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.elderease">
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="true" />
+
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+<!--    <uses-feature android:name="android.hardware.location.gps" />-->
+
 
     <application
         android:allowBackup="true"
@@ -10,6 +20,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".medicineReminder"></activity>
+
+        <activity android:name=".magnifier">
+<!--            <intent-filter-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <action-->
+<!--                    android:name="android.intent.action.MAIN"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--                <category-->
+<!--                    android:name="android.intent.category.LAUNCHER"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content" />-->
+<!--            </intent-filter>-->
+        </activity>
+
         <activity android:name=".homeScreen" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,5 +47,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

@@ -36,6 +36,7 @@ public class homeScreen extends AppCompatActivity  {
     CardView music;
     CardView phone;
     CardView sos;
+    CardView game;
     TextView S;
     private DBHelper db;
 //    int color = Color.parseColor("#FF000");
@@ -61,6 +62,7 @@ public class homeScreen extends AppCompatActivity  {
         medRem = findViewById(R.id.medRem);
         sos = findViewById(R.id.SOS);
         music = findViewById(R.id.relaxingMusic);
+        game  = findViewById(R.id.game);
         S = findViewById(R.id.textView);
 
         phone.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +77,16 @@ public class homeScreen extends AppCompatActivity  {
 
             }
         });
+
+        game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(homeScreen.this,gameSelect.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         music.setOnClickListener(new View.OnClickListener() {
             @Override

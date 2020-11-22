@@ -2,16 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.elderease">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <uses-feature
         android:name="android.hardware.camera.flash"
@@ -29,7 +33,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".gameSelect"></activity>
         <activity android:name=".sos" />
         <activity android:name=".magnifier" />
         <activity android:name=".homeScreen" />
@@ -38,7 +42,7 @@
         <activity android:name=".report.MonthlyReportActivity" />
         <activity android:name=".alarm.ReminderActivity" />
         <activity android:name=".MusicPlayer2" />
-        <activity android:name=".phoneCall"/>
+        <activity android:name=".phoneCall" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

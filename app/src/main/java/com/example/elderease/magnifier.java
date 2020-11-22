@@ -1,163 +1,284 @@
 package com.example.elderease;
 
-import android.hardware.Camera;
+
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.snackbar.Snackbar;
 
-public class magnifier extends AppCompatActivity {
-    ImageView imageViewMag;
-    Camera camera;
-    FrameLayout camera_preview;
-    showCamera showCamera;
+
+public class magnifier extends AppCompatActivity implements Imagnifier{
+
+    private static final String TAG = "magnifier";
+    private static final int REQUEST_CODE = 1234;
+    public static String CAMERA_POSITION_FRONT;
+    public static String CAMERA_POSITION_BACK;
+    public static String MAX_ASPECT_RATIO;
+
+    private boolean mPermissions;
+    public String mCameraOrientation = "none"; // Front-facing or back-facing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_magnifier);
-
-        FrameLayout camera_preview = findViewById(R.id.camera_preview);
-        Button button_capture = findViewById(R.id.button_capture);
-//        TextView txtMag = findViewById((R.id.txtMag));
-
-        //open camera
-        camera = Camera.open();
-        showCamera = new showCamera(this,camera);
-        camera_preview.addView(showCamera);
-
-        
-//        button_capture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(magnifier.this, "Opening Camera...", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA);
-//                startActivityForResult(intent, 0);
-//            }
-//        });
-        
-        
+        init();
     }
 
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-//        ImageView imageViewMag = findViewById(R.id.imageViewMag);
-//        super.onActivityResult(requestCode, resultCode, data);
-//        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-//        imageViewMag.setImageBitmap(bitmap);
-//    }
+    private void startCamera2(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.camera_container, Camera2Fragment.newInstance(), getString(R.string.fragment_camera2));
+        transaction.commit();
+    }
+
+    private void init(){
+        if(mPermissions){
+            if(checkCameraHardware(this)){
+
+                // Open the Camera
+                startCamera2();
+            }
+            else{
+                showSnackBar("You need a camera to use this application", Snackbar.LENGTH_INDEFINITE);
+            }
+        }
+        else{
+            verifyPermissions();
+        }
+    }
+
+    /** Check if this device has a camera */
+    private boolean checkCameraHardware(Context context) {
+        // this device has a camera
+        // no camera on this device
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    }
+
+    public void verifyPermissions(){
+        Log.d(TAG, "verifyPermissions: asking user for permissions.");
+        String[] permissions = {
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA};
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                permissions[0] ) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                permissions[1] ) == PackageManager.PERMISSION_GRANTED) {
+            mPermissions = true;
+            init();
+        } else {
+            ActivityCompat.requestPermissions(
+                    magnifier.this,
+                    permissions,
+                    REQUEST_CODE
+            );
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == REQUEST_CODE){
+            if(mPermissions){
+                init();
+            }
+            else{
+                verifyPermissions();
+            }
+        }
+    }
 
 
-//    /** Check if this device has a camera */
-//    private boolean checkCameraHardware(Context context) {
-//        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-//            // this device has a camera
-//            return true;
-//        } else {
-//            // no camera on this device
-//            return false;
-//        }
-//    }
+    private void showSnackBar(final String text, final int length) {
+        View view = this.findViewById(android.R.id.content).getRootView();
+        Snackbar.make(view, text, length).show();
+    }
 
-        
-//    /** A basic Camera preview class */
-//    public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
-//        private SurfaceHolder mHolder;
-//        private Camera mCamera;
-//
-//        public CameraPreview(Context context, Camera camera) {
-//            super(context);
-//            mCamera = camera;
-//
-//            // Install a SurfaceHolder.Callback so we get notified when the
-//            // underlying surface is created and destroyed.
-//            mHolder = getHolder();
-//            mHolder.addCallback(this);
-//            // deprecated setting, but required on Android versions prior to 3.0
-//            mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-//        }
-//
-//        public void surfaceCreated(SurfaceHolder holder) {
-//            // The Surface has been created, now tell the camera where to draw the preview.
-//            try {
-//                mCamera.setPreviewDisplay(holder);
-//                mCamera.startPreview();
-//            } catch (IOException e) {
-//                Log.d(CAMERA_SERVICE, "Error setting camera preview: " + e.getMessage());
-//            }
-//        }
-//
-//        public void surfaceDestroyed(SurfaceHolder holder) {
-//            // empty. Take care of releasing the Camera preview in your activity.
-//        }
-//
-//        public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-//            // If your preview can change or rotate, take care of those events here.
-//            // Make sure to stop the preview before resizing or reformatting it.
-//
-//            if (mHolder.getSurface() == null){
-//                // preview surface does not exist
-//                return;
-//            }
-//
-//            // stop preview before making changes
-//            try {
-//                mCamera.stopPreview();
-//            } catch (Exception e){
-//                // ignore: tried to stop a non-existent preview
-//            }
-//
-//            try {
-//                mCamera.setPreviewDisplay(mHolder);
-//                mCamera.startPreview();
-//
-//            } catch (Exception e){
-//                Log.d(CAMERA_SERVICE, "Error starting camera preview: " + e.getMessage());
-//            }
-//        }
-//    }
-//
-//    public class CameraActivity extends Activity {
-//
-//        // Create an instance of Camera
-//        private Camera mCamera = getCameraInstance();
-//        private CameraPreview mPreview;
-//        private SurfaceView preview;
-//
-//        @Override
-//        public void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.activity_magnifier);
-//
-//            // Create our Preview view and set it as the content of our activity.
-//            mPreview = new CameraPreview(this, mCamera);
-//            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-//            preview.addView(mPreview);
-//
-//            }
-//        }
-//    public String getFlashMode (){
-//        return null;
-//    }
-//
-//    public void setFlashMode (String value){
-//
-//    }
-//
-//    public static final String FLASH_MODE_ON(){
-//        return null;
-//    }
-//
-//    public static final String FLASH_MODE_OFF(){
-//        return null;
-//    }
-//
-//    //Constant emission of light during preview
-//    public static final String FLASH_MODE_TORCH(){
-//        return null;
-//    }
+    @Override
+    public void setCameraFrontFacing() {
+        Log.d(TAG, "setCameraFrontFacing: setting camera to front facing.");
+        mCameraOrientation = CAMERA_POSITION_FRONT;
+    }
+
+    @Override
+    public void setCameraBackFacing() {
+        Log.d(TAG, "setCameraBackFacing: setting camera to back facing.");
+        mCameraOrientation = CAMERA_POSITION_BACK;
+    }
+
+    @Override
+    public void setFrontCameraId(String cameraId){
+        CAMERA_POSITION_FRONT = cameraId;
+    }
+
+
+    @Override
+    public void setBackCameraId(String cameraId){
+        CAMERA_POSITION_BACK = cameraId;
+    }
+
+    @Override
+    public boolean isCameraFrontFacing() {
+        return mCameraOrientation.equals(CAMERA_POSITION_FRONT);
+    }
+
+    @Override
+    public boolean isCameraBackFacing() {
+        return mCameraOrientation.equals(CAMERA_POSITION_BACK);
+    }
+
+    @Override
+    public String getBackCameraId(){
+        return CAMERA_POSITION_BACK;
+    }
+
+    @Override
+    public String getFrontCameraId(){
+        return CAMERA_POSITION_FRONT;
+    }
+
+    @Override
+    public void hideStatusBar() {
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public void showStatusBar() {
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public void hideStillshotWidgets() {
+        Camera2Fragment camera2Fragment = (Camera2Fragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.fragment_camera2));
+        if (camera2Fragment != null) {
+            if(camera2Fragment.isVisible()){
+                camera2Fragment.drawingStarted();
+            }
+        }
+    }
+
+    @Override
+    public void showStillshotWidgets() {
+        Camera2Fragment camera2Fragment = (Camera2Fragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.fragment_camera2));
+        if (camera2Fragment != null) {
+            if(camera2Fragment.isVisible()){
+                camera2Fragment.drawingStopped();
+            }
+        }
+    }
+
+    @Override
+    public void setTrashIconSize(int width, int height){
+        Camera2Fragment camera2Fragment = (Camera2Fragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.fragment_camera2));
+        if (camera2Fragment != null) {
+            if(camera2Fragment.isVisible()){
+                camera2Fragment.setTrashIconSize(width, height);
+            }
+        }
+    }
 
 }
 
 
+//import android.hardware.Camera;
+//import android.os.Bundle;
+//import android.os.Environment;
+//import android.view.View;
+//import android.widget.Button;
+//import android.widget.FrameLayout;
+//import android.widget.ImageView;
+//
+//import androidx.appcompat.app.AppCompatActivity;
+//
+//import java.io.File;
+//import java.io.FileOutputStream;
+//    FrameLayout camera_preview;
+//import java.io.IOException;
+//
+//public class magnifier extends AppCompatActivity {
+//    ImageView imageViewMag;
+//    Camera camera;
+//    showCamera showCamera;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_magnifier);
+//
+//        FrameLayout camera_preview = findViewById(R.id.camera_preview);
+//        Button button_capture = findViewById(R.id.button_capture);
+////        TextView txtMag = findViewById((R.id.txtMag));
+//
+//        //open camera
+//        camera = Camera.open();
+//        showCamera = new showCamera(this, camera);
+//        camera_preview.addView(showCamera);
+
+//    }
+//    Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
+//        @Override
+//        public void onPictureTaken(byte[] data, Camera camera) {
+//            File picture_file = getOutputMediaFile();
+//
+//            if(picture_file == null){
+//                return;
+//            }
+//            else
+//            {
+//                try {
+//                    FileOutputStream fos = new FileOutputStream(picture_file);
+//                    fos.write(data);
+//                    fos.close();
+//
+//                    camera.startPreview();
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    };
+//
+//    private File getOutputMediaFile()
+//    {
+//        String state = Environment.getExternalStorageState();
+//        if(!state.equals(Environment.MEDIA_MOUNTED)){
+//            return null;
+//        }
+//        else
+//        {
+//            File folder_gui = new File(Environment.getExternalStorageDirectory() + File.separator + "GUI");
+//
+//            if(folder_gui.exists())
+//            {
+//                folder_gui.mkdirs();
+//            }
+//
+//            File outputFile = new File(folder_gui, "temp.jpg");
+//            return outputFile;
+//        }
+//    }
+//    public void captureImage(View v){
+//        if(camera != null){
+//            camera.takePicture(null, null, mPictureCallback);
+//        }
+//    }
+//}
+//

@@ -2,7 +2,10 @@ package com.example.elderease;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -10,6 +13,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,12 +50,16 @@ public class MainActivity extends AppCompatActivity {
         appName.setAnimation(bottomAnim);
         slogan.setAnimation(bottomAnim);
 
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 Intent intent = new Intent(MainActivity.this,homeScreen.class);
                 startActivity(intent);
                 finish();
+
             }
         },SPLASH_SCREEN);
 

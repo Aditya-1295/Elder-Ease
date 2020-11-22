@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    app:cardBackgroundColor="@android:color/holo_red_dark"
     tools:context=".homeScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,12 +17,25 @@
             android:id="@+id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="36dp"
             android:text="Elder Ease"
+            android:textColor="#686464"
             android:textSize="40sp"
+            android:textStyle="bold"
             app:fontFamily="casual"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/eldereaselogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/appName"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -37,6 +51,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="175dp"
+            android:layout_marginTop="80px"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +94,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/SOS"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -98,7 +114,7 @@
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/hospital" />
+                        app:srcCompat="@drawable/emergency" />
 
                     <TextView
                         android:id="@+id/textView"
@@ -107,8 +123,10 @@
                         android:layout_below="@id/imageView"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="Hospital Schedule"
+                        android:text="SOS"
                         android:textSize="18sp" />
+
+
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
@@ -123,6 +141,7 @@
             tools:layout_editor_absoluteX="1dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/relaxingMusic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -239,6 +258,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/quickPhone"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:clickable="true"
@@ -271,36 +291,10 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/sos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="#FF0000"
-            android:elevation="10dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:shadowColor="#9A9797"
-            android:text="SOS"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-
-        <!--        <Button-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content">-->
-        <!--            <ImageView-->
-        <!--                android:id="@+id/imageView2"-->
-        <!--                android:layout_width="100dp"-->
-        <!--                android:layout_height="100dp"-->
-        <!--                app:srcCompat="@drawable/sos" />-->
-
-        <!--        </Button>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </ScrollView>

@@ -43,6 +43,8 @@ public class sos extends AppCompatActivity {
             phoneOne.setText(cursor.getString(1));
             phoneTwo.setText(cursor.getString(2));
             message.setText(cursor.getString(3));
+
+
         }
 
 

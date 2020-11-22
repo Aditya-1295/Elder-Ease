@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#b2fcff"
+    tools:context=".phoneCall">
+
+    <Button
+        android:id="@+id/callb3"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/halfroundright"
+        android:text="CALL"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/quickPhone3"
+        app:layout_constraintEnd_toEndOf="@+id/callb2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/quickPhone3" />
+
+    <Button
+        android:id="@+id/callb2"
+        android:layout_width="89dp"
+        android:layout_height="40dp"
+        android:background="@drawable/halfroundright"
+        android:text="CALL"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/quickPhone2"
+        app:layout_constraintEnd_toEndOf="@+id/callb1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/quickPhone2" />
+
+    <EditText
+        android:id="@+id/quickPhone2"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/halfroundleft"
+        android:ems="10"
+        android:inputType="phone"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@+id/quickPhone1"
+        app:layout_constraintTop_toBottomOf="@+id/quickPhone1" />
+
+    <EditText
+        android:id="@+id/quickPhone1"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="172dp"
+        android:background="@drawable/halfroundleft"
+        android:ems="10"
+        android:inputType="phone"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_call" />
+
+    <EditText
+        android:id="@+id/et_number"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:background="@drawable/roundbox"
+        android:digits="1234567890"
+        android:hint="Dial a number"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/roundbox"
+        android:backgroundTint="@color/green"
+        android:text="CALL"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/et_number"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/et_number"
+        app:layout_constraintTop_toBottomOf="@+id/et_number" />
+
+    <Button
+        android:id="@+id/callb1"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:background="@drawable/halfroundright"
+        android:text="CALL"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/quickPhone1"
+        app:layout_constraintTop_toTopOf="@+id/quickPhone1" />
+
+    <EditText
+        android:id="@+id/quickPhone3"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/halfroundleft"
+        android:ems="10"
+        android:inputType="phone"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@+id/quickPhone2"
+        app:layout_constraintTop_toBottomOf="@+id/quickPhone2" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/quickPhone1"
+        app:layout_constraintTop_toBottomOf="@+id/bt_call" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR Fast Dial"
+        app:layout_constraintBottom_toTopOf="@+id/quickPhone1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="0.083" />
+
+    <Button
+        android:id="@+id/phoneSave"
+        android:background="@drawable/roundbox"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:elevation="100dp"
+        android:shadowColor="#4A4A4A"
+        android:textColor="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
